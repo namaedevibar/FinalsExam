@@ -51,6 +51,7 @@ public class VideoTable {
         values.put(VideoEntry.COL_TITLE, video.getTitle());
         values.put(VideoEntry.COL_DESCRIPTION, video.getDescription());
         values.put(VideoEntry.COL_THUMBNAIL_URL, video.getThumbnailUrl());
+        
         return values;
     }
 
