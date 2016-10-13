@@ -142,7 +142,6 @@ public class VideoTable {
 
                vid = createVideoFromCursor(cursor);
 
-
                 videos.add(vid);
 
             }
