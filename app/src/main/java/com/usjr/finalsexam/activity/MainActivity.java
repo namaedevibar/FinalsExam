@@ -3,10 +3,12 @@ package com.usjr.finalsexam.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.usjr.finalsexam.R;
 import com.usjr.finalsexam.adapters.VideoListAdapter;
@@ -22,6 +24,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private VideoListAdapter mAdapter;
     private ProgressBar      mProgressBar;
     private VideosController mController;
+    ListView listView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +39,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         mAdapter = new VideoListAdapter(this, new ArrayList<Video>());
 
         listView.setAdapter(mAdapter);
-
+        listView.setOnItemClickListener(this);
         prepareData();
         displayListOfVideos();
+        hideProgressBar();
+
     }
 
     private void prepareData() {
@@ -54,20 +60,33 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void displayListOfVideos() {
-        // TODO: Implement this method
+        List<Video> videos = VideoTable.getAllVideos(getApplicationContext());
+
+        mAdapter.addAll(videos);
+
+//        VideoTable vt = new VideoTable();
+//        List<Video> videos = vt.getAllVideos(this);
+//       Toast.makeText(this,videos.get(0).getTitle(), Toast.LENGTH_SHORT).show();
+//
+//        mAdapter = new VideoListAdapter(this, videos);
+//        mAdapter.addAll(videos);
+//
+//        listView.setAdapter(mAdapter);
+
     }
 
     public void showProgressBar() {
-        // TODO: Implement this method
+        mProgressBar.setVisibility(View.VISIBLE);
     }
 
     public void hideProgressBar() {
-        // TODO: Implement this method
+        mProgressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(this, PlayVideoActivity.class);
+        intent.putExtra("VID_ID", mAdapter.getItem(position).getId());
         startActivity(intent);
     }
 }
