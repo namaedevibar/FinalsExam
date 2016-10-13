@@ -42,7 +42,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         listView.setOnItemClickListener(this);
         prepareData();
         displayListOfVideos();
-        hideProgressBar();
+
+        if (mAdapter == null){
+
+            showProgressBar();
+        }
+        else{
+
+            hideProgressBar();
+        }
+
 
     }
 
@@ -64,14 +73,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         mAdapter.addAll(videos);
 
-//        VideoTable vt = new VideoTable();
-//        List<Video> videos = vt.getAllVideos(this);
-//       Toast.makeText(this,videos.get(0).getTitle(), Toast.LENGTH_SHORT).show();
-//
-//        mAdapter = new VideoListAdapter(this, videos);
-//        mAdapter.addAll(videos);
-//
-//        listView.setAdapter(mAdapter);
 
     }
 
